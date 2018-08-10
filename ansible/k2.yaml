@@ -1,0 +1,9 @@
+--- # My First Playbook
+ - hosts: client
+   remote_user: ansible
+   become: yes
+   tasks:
+   - name: 
+     service:
+      name: firewalld
+      state: restarted

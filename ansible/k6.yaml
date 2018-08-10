@@ -1,0 +1,12 @@
+--- # Handlers errors Playbook
+ - hosts: local
+   remote_user: ansible
+   become: yes
+   tasks:
+   - name: Downloan in time
+     get_url:
+       url: https://speed.hetzner.de/10GB.bin
+#http://unec.edu.az/application/uploads/2014/12/pdf-sample.pdf
+       dest: /tmp
+     async: 100
+     poll: 5    

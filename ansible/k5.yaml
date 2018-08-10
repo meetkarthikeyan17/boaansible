@@ -1,0 +1,24 @@
+--- # Handlers errors Playbook
+ - hosts: local
+   remote_user: ansible
+   become: yes
+   vars:
+    web_package: httpd
+    remote_access: telnet
+    one_more: mariadb
+   tasks:
+    - block:
+      - name: installing Apache on nodes
+        yum:
+         name: "{{ web_package}}"
+         state: latest
+      rescue:
+      - name: Installing Telnet
+        yum:
+         name: "{{ remote_access}}"
+         state: latest
+      always:
+      - name: Installing Mariadb
+        yum:
+         name: "{{ one_more}}"
+         state: latest

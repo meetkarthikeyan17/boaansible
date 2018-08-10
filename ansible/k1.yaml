@@ -1,0 +1,26 @@
+--- # My First Playbook
+ - hosts: client
+   remote_user: ansible
+   become: yes
+   tasks:
+   - name: Installing httpd on node 2
+     yum:
+      name: httpd
+      state: latest
+   - name: Restarting the Appache Service
+     service:
+      name: httpd
+      state: restarted
+   - name : Creating an Indexfile
+     file:
+      state: touch
+      dest: /var/www/html/index.html
+   - name : Copying the Content Hello Karthik to index
+     copy:
+      content: "Welcome Karthik for Ansible Playbook"
+      dest: /var/www/html/index.html 
+   - name : Firewall for service httpd enable 
+     service:
+      name: httpd
+      state: restarted
+      enabled: yes

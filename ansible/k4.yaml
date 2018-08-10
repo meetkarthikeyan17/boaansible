@@ -1,0 +1,19 @@
+--- # Handlers errors Playbook
+ - hosts: local
+   remote_user: ansible
+   become: yes
+   vars:
+    web_package: httpd
+    remote_access: telnet
+   tasks: 
+   - name: installing Apache on nodes
+     yum:
+      name: "{{ web_package}}"
+      state: latest
+     ignore_errors: yes
+   - name: Installing Telnet
+     yum:
+      name: "{{ remote_access}}"
+      state: latest
+      
+
