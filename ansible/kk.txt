@@ -1,0 +1,562 @@
+[root@localhost ~]# history
+    1  free 0m
+    2  free -mh
+    3  init 0
+    4  systemctl status docker
+    5  yum install docker
+    6  systemctl status docker
+    7  systemctl restart docker
+    8  systemctl status docker
+    9  docker version
+   10  ip a
+   11  cat /etc/os-release
+   12  cat /etc/sysconfig/docker
+   13  cat /etc/containers/registries.conf
+   14  history
+   15  docker images
+   16  docker search ubuntu
+   17  docker images
+   18  docker pull docker.io/ubuntu
+   19  docker images
+   20  docker ps
+   21  docker run -it 735f80812f90 ls
+   22  docker run -it 735f80812f90 /etc/os-release
+   23  docker run -it 735f80812f90 cat /etc/os-release
+
+
+
+[root@localhost ~]# ls /bin |wc
+    675     675    5983
+[root@localhost ~]# docker run -it 735f80812f90 ls /bin | wc
+     15      85     889
+[root@localhost ~]# docker ps
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+[root@localhost ~]# docker ps -a
+CONTAINER ID        IMAGE               COMMAND                 CREATED             STATUS                      PORTS               NAMES
+7043ff8c2e31        735f80812f90        "ls /bin"               28 seconds ago      Exited (0) 27 seconds ago                       affectionate_golick
+d966c1286443        735f80812f90        "cat /etc/os-release"   3 minutes ago       Exited (0) 3 minutes ago                        dazzling_feynman
+5789ceb90668        735f80812f90        "/etc/os-release"       3 minutes ago       Created                                         serene_swartz
+e7ec7de412d6        735f80812f90        "ls"                    4 minutes ago       Exited (0) 4 minutes ago                        confident_bhabha
+
+
+    6  ps -ef | grep docker
+
+
+    4  ps -ef | grep docker
+    5  kill -9 10021
+    6  ps -ef | grep docker
+    7  history
+    8  docker run -it -d ubuntu bash
+    9  docker ps
+   10  docker run --name boa -it -d ubuntu bash
+   11  docker ps
+   12  docker run --name boa -it -d ubuntu bash
+   13  docker ps
+   14  docker exec -it boa ls
+   15  docker exec -it boa echo "hello" > abc.txt
+   16  docker exec -it boa ls
+   17  docker ps
+   18*
+   19  docker run --name boa1 -it -d ubuntu bash
+   20  docker ps
+   21  docker inspect boa | grep "IPAddress"
+   22  docker inspect boaa | grep "IPAddress"
+   23  docker inspect boa1 | grep "IPAddress"
+   24  docker pause boa
+   25  docker ps
+   26  docker exec -it boa ls
+   27  docker unpause boa
+   28  docker exec -it boa ls
+   29  docker ps
+   30  docker exec -it boa ls
+   31  docker run --name boa -it -d ubuntu bash
+   32  docker rm boa
+   33  docker stop boa
+   34  docker rm boa
+   35  docker ps
+   36  docker run --name boa -it -d ubuntu bash
+   37  docker ps
+   38  clear
+   39  docker pull opensuse
+   40  history
+
+
+
+[root@localhost ~]# docker exec -it 58753a1497bc bash
+root@58753a1497bc:/usr/local/apache2# ls
+bin  build  cgi-bin  conf  error  htdocs  icons  include  logs  modules
+root@58753a1497bc:/usr/local/apache2# cd htdocs
+root@58753a1497bc:/usr/local/apache2/htdocs# ls
+index.html
+root@58753a1497bc:/usr/local/apache2/htdocs# echo " WElcome to BOA" > index.html
+root@58753a1497bc:/usr/local/apache2/htdocs# cat index.html
+ WElcome to BOA
+root@58753a1497bc:/usr/local/apache2/htdocs# history
+    1  ls
+    2  cd htdocs
+    3  ls
+    4  echo " WElcome to BOA" > index.html
+    5  cat index.html
+
+
+
+
+
++++++++++++++++++++++++++++++
+
+Day 2 
+=============================
+
+
+ 44  docker images
+   45  docker run --name newuser1 -itd opensuse bash
+   46  docker ps
+   47  docker exec -it newuser1 bash
+   48  docker commit sample1 newuser1
+   49  docker commit newuser1 sample1
+   50  docker images
+   51  docker ps
+   52  docker stop newuser1
+   53  docker ps
+   54  docker images
+   55  docker run -it sample1 bash
+
+
+
+file local to container and container to local 
+
+38  docker run -itd ubuntu bash
+   39  docker ps
+   40  echo " Hello WElcomto the Container Session" > kart.txt
+   41  ls
+   42  docker cp kart.txt 801be480295e:/kart.doc
+   43  docker exec 801be480295e ls
+   44  docker exec 801be480295e cat kart.doc
+   45  ls
+   46  cat kart.txt
+   47  docker cp 801be480295e:/kart.doc kart1.doc1
+
+
+
+
+53  docker ps
+   54  docker images
+   55  docker run -it sample1 bash
+   56  history
+   57  docker run -v /data:/mydata:Z -itd ubuntu bash
+   58  docker ps
+   59  ls
+   60  docker exec d773868aae9e ls
+   61  pwd
+   62  cd /
+   63  ls
+   64  cd data
+   65  ls
+   66  touch abc{1..5}
+   67  ls
+   68  docker exec d773868aae9e ls
+   69  docker exec d773868aae9e ls /mydata/
+   70  docker pull pavansw/testrepo:ubuntu0.1
+
+
+
+
+
+
+ docker pull pavansw/testrepo:ubuntu0.1
+
+https://hub.docker.com/
+meetkarthikeyan17
+Kart@1979
+
+
+52  docker images
+   53  export DOCKER_ID_USER="meetkarthikeyan17"
+   54  docker login
+   55  docker images
+   56  docker tag sample1 $DOCKER_ID_USER/sample
+   57  docker images
+   58  docker push $DOCKER_ID_USER/sample
+
+
+   55  docker images
+   56  docker tag sample1 $DOCKER_ID_USER/sample
+   57  docker images
+   58  docker push $DOCKER_ID_USER/sample
+   59  history
+   60  docker tag sample1 $DOCKER_ID_USER/sample:version1
+   61  docker images
+   62  docker push $DOCKER_ID_USER/sample
+   63  docker tag sample1 $DOCKER_ID_USER/boa:second
+   64  docker push $DOCKER_ID_USER/boa
+   65  docker tag sample1 $DOCKER_ID_USER/boa:third
+   66  docker push $DOCKER_ID_USER/boa
+
+
+docker pull mariadb:latest
+docker images
+docker run --name some-mariadb -e MYSQL_ROOT_PASSWORD=my-secret-pw -d mariadb:latest
+docker exec -it 70bfc8cc67ef bash
+
+
+[root@localhost testing]# ls
+Dockerfile  test1
+[root@localhost testing]# cat Dockerfile
+FROM docker.io/centos
+MAINTAINER kart <kart@test.com>
+ADD test1 /root/test1.txt
+RUN useradd kart
+RUN echo "redhat" | passwd --stdin kart
+RUN yum install -y httpd
+ENV SIT1=boa
+EXPOSE 80
+ENTRYPOINT ["/usr/sbin/httpd"]
+CMD ["-D", "FOREGROUND"]
+
+
+
+docker build -t chennai .
+docker run -itd -p 8082:80 chennai
+   76  docker run -itd -p 9090:80 chennai
+   77  docker ps
+   78  docker exec -it 16e01bde3d84 bash
+
+ls /root/
+ps -a
+http://   :9090
+
+
+=================
+jenkins
+================
+https://wiki.jenkins.io/display/JENKINS/Installing+Jenkins+on+Red+Hat+distributions
+
+yum install wget
+wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat/jenkins.repo
+
+
+
+
+  152  hostname
+  153  yumlist installed python
+  154  yum list installed python
+  155  yum install -y ansible
+  156  hostname
+  157  vi /etc/hosts
+  158  hostname
+  159  ping node2.chennai.com
+  160  cd /home
+  161  ls
+  162  useradd ansible1
+  163  passwd ansible1
+  164  ls
+
+
+
+
+
+
+
+
+
+
+ssh-copy-id ansible@node1.chennai.com
+    2  sudo vi /etc/ansible/ansible.cfg
+    3  mkdir test
+    4  pwd
+    5  cd test
+    6  ls
+    7  vi inventory.txt
+    8  mv inventory.txt inventory
+    9  ls
+   10  ansible boa -i inventory --list-host
+   11  ansible client -i inventory --list-host
+   12  ansible local -i inventory --list-host
+   13  ansible all -i inventory --list-host
+
+
+
+[ansible@node1 test]$ history
+    1  ssh-copy-id ansible@node1.chennai.com
+    2  sudo vi /etc/ansible/ansible.cfg
+    3  mkdir test
+    4  pwd
+    5  cd test
+    6  ls
+    7  vi inventory.txt
+    8  mv inventory.txt inventory
+    9  ls
+   10  ansible boa -i inventory --list-host
+   11  ansible client -i inventory --list-host
+   12  ansible local -i inventory --list-host
+   13  ansible all -i inventory --list-host
+   14  history
+   15  ansible boa -i inventory -a hostname
+   16  ansible boa -i inventory -a local
+   17  ansible local -i inventory -a hostname
+   18  ansible all -i inventory -a hostname
+   19  ansible all -u ansible -i inventory -a hostname
+   20  ansible all -u ansible1 -i inventory -a hostname
+   21  ssh-copy-id ansible1@node1.chennai.com
+   22  ansible all -u ansible1 -i inventory -a hostname
+   23  ansible all --become-user=ansible1 -i inventory -a hostname
+   24  whoami
+   25  ansible all --become-user=ansible1 -i inventory -a whoami
+   26  ansible all -b --become-user=ansible1 -i inventory -a whoami
+   27  ansible --help
+   28  ansible boa -i inventory -m command -a /usr/bin/hostname
+   29  ansible boa -i inventory -m command -a /usr/bin/date
+   30  ansible boa -i inventory -m ping
+   31  history
+
+
+/etc/hosts
+hostnamectl set-hostname node.chennai.com
+useradd ansible
+passwd ansible
+
+
+   54  ansible local -i inventory -m copy -a 'content=" Hello Everyone" dest=/tmp/abc'
+   55  cat /tmp/abc
+   56  ansible local -i inventboa -m copy -a 'content=" Hello Everyone" dest=/tmp/abc'
+   57  ansible boa -i inventory -m copy -a 'content=" Hello Everyone" dest=/tmp/abc'
+   58  ansible boa -i inventory -m copy -a 'src=/home/ansible/test/sample.txt  dest=/tmp/rash'
+   59  echo " Hello Karthik" > sample.txt
+   60  ansible boa -i inventory -m copy -a 'src=/home/ansible/test/sample.txt  dest=/tmp/rash'
+   61  ls -l /tmp/
+   62  ansible boa -i inventory -m copy -a 'src=/home/ansible/test/sample.txt  dest=/tmp/rash owner=root'
+   63  ansible boa -i inventory -m copy -a 'src=/home/ansible/test/sample.txt  dest=/tmp/abc1 owner=root'
+
+   43  ansible boa -i inventory -m command -a 'date +%Y'
+   44  ansible boa -i inventory -m command -a date +%Y
+   45  ansible boa -i inventory -m command -a "date +%Y"
+   46  ansible boa -i inventory -m command -a "dir "
+   47  ansible boa -i inventory -m command -a "date +%D"
+
+
+
+
+   69  ansible boa -b -i inventory -m copy -a 'src=/home/ansible/test/sample.txt  dest=/tmp/rash owner=root'
+   70  ansible boa -become -i inventory -m copy -a 'src=/home/ansible/test/sample.txt  dest=/tmp/rash owner=root'
+
+
+
+
+
+   83  ansible boa -i inventory -m file -a 'state=touch path=/newfile.php'
+   84  ansible boa -i inventory -m file -a 'state=touch path=/tmp/newfile.php'
+   85  ansible boa -i inventory -m file -a 'state=directory path=/tmp/test12'
+   86  ansible boa -i inventory -m file -a 'state=absent path=/tmp/test12'
+   87  ansible boa -i inventory -m file -a 'state=directory path=/tmp/test12'
+   88  ansible boa -i inventory -m file -a 'gid=777 path=/tmp/test12'
+   89  ansible boa -i inventory -m file -a 'mode=0777 path=/tmp/test12'
+   91  ansible boa -i inventory -m file -a 'mode=0777 path=/tmp/test12 force=yes'
+   92  ansible boa -i inventory -m file -a 'mode=0777 path=/tmp/test12/sample force=yes'
+   93  ansible boa -i inventory -m file -a 'state=directory mode=0777 path=/tmp/test12/sample force=yes'
+   94  ansible boa -i inventory -m file -a 'state=directory mode=0777 path=/tmp/test12/sample1 force=yes'
+   95  ansible boa -i inventory -m file -a 'state=link src=/tmp/test12/sample dest=/tmp/test12/sample1 mode=0777 path=/tmp/test12/sample force=yes'
+   96  ls -lrt /tmp/test12/sample
+   97  ls -lrt /tmp/test12/
+
+
+ansible boa -i inventory -m file -a 'state=link src=/tmp/test12/sample  mode=0777 path=/tmp/test12/sample force=yes'
+
+  131  ansible -i local,-c , --connection=local -a hostname
+  132  ansible -i 192.168.249.129 ,-c , --connection=local -a hostname
+  133  ansible -i 192.168.249.129,-c , --connection=local -a hostname
+
+  149  ansible local -i inventory -b -m yum -a 'name=httpd state=present'
+  150  ansible client -i inventory -b -m yum -a 'name=httpd state=present'
+  151  ansible client -b -i inventory -m file -a 'state=touch dest=/var/www/html/index.html'
+  152  ansible client -b -i inventory -m copy -a 'content="Welcome Karthik " dest=/var/www/html/index.html'
+  153  ansible client -b -i inventory -b -m service -a 'name=httpd state=restarted'
+  154  curl http://node2.chennai.com:4545
+  155  curl http://node2.chennai.com:8080
+  159  ansible client -b -i inventory -b -m firewalld -a 'name=httpd state=enabled'
+  160  ansible client -b -i inventory -b -m firewalld -a 'state=enabled'
+  161  ansible client -b -i inventory -b -m firewalld -a 'state=disabled'
+  162  ansible client -b -i inventory -b -m firewalld -a 'state=enable'
+  163  ansible client -b -i inventory -b -m firewalld -a 'state=enabled'
+  164  ansible client -b -i inventory -b -m firewalld -a 'state=present'
+
+
+
+ ansible client -b -m service -a 'name=httpd state=restarted enabled=yes'
+
+[ansible@node1 test]$ ls
+ansible.cfg  inventory  sample.txt
+[ansible@node1 test]$ cat ansible.cfg
+[defaults]
+inventory= ./inventory
+[ansible@node1 test]$ cat inventory
+[local]
+localhost
+
+[boa]
+node1.chennai.com
+node2.chennai.com
+
+[client]
+192.168.249.130
+
+
+
+
+
+===============================================
+
+
+    8  firewall-cmd --permanent --add-service=http
+    9  firewall-cmd --reload
+   10  curl http://localhost
+   12  firewall-cmd --permanent --add-port=443/tcp
+   13  firewall-cmd --list-all
+
+
+[ansible@node1 test]$ vi /etc/ansible/hosts
+[ansible@node1 test]$ sudo vi /etc/ansible/hosts
+[ansible@node1 test]$ ansible all --list-hosts
+  hosts (4):
+    node1.chennai.com
+    node2.chennai.com
+    192.168.249.130
+    localhost
+
+
+
+
+================================================
+[ansible@node1 ~]$ cat k3.yaml
+--- # My First Playbook
+ - hosts: local
+   remote_user: ansible
+   become: yes
+   tasks:
+   - name: Confirm User
+     user:
+      name: kart
+      state: absent
+     notify : test_one
+
+   handlers:
+   - name: test_one
+     service:
+      name: httpd
+      state: stopped
+==============================================
+[ansible@node1 ~]$ cat k1.yaml
+--- # My First Playbook
+ - hosts: client
+   remote_user: ansible
+   become: yes
+   tasks:
+   - name: Installing httpd on node 2
+     yum:
+      name: httpd
+      state: latest
+   - name: Restarting the Appache Service
+     service:
+      name: httpd
+      state: restarted
+   - name : Creating an Indexfile
+     file:
+      state: touch
+      dest: /var/www/html/index.html
+   - name : Copying the Content Hello Karthik to index
+     copy:
+      content: "Welcome Karthik for Ansible Playbook"
+      dest: /var/www/html/index.html
+   - name : Firewall for service httpd enable
+     service:
+      name: httpd
+      state: restarted
+      enabled: yes
+==================================================
+
+[ansible@node1 ~]$ cat k2.yaml
+--- # My First Playbook
+ - hosts: client
+   remote_user: ansible
+   become: yes
+   tasks:
+   - name:
+     service:
+      name: firewalld
+      state: restarted
+================================================
+
+[ansible@node1 ~]$ cat one.yaml
+--- # My First Playbook
+ - hosts: boa
+   remote_user: ansible
+   become: yes
+   tasks:
+   - name: Installing Apache on nodes
+     yum:
+      name: httpd
+      state: latest
+   - name: Restarting the Appache SErvice
+     service:
+      name: httpd
+      state: restarted
+==============================================
+[ansible@node1 ~]$ cat k4.yaml
+--- # Handlers errors Playbook
+ - hosts: local
+   remote_user: ansible
+   become: yes
+   vars:
+    web_package: httpd
+    remote_access: telnet
+   tasks:
+   - name: installing Apache on nodes
+     yum:
+      name: "{{ web_package}}"
+      state: latest
+     ignore_errors: yes
+   - name: Installing Telnet
+     yum:
+      name: "{{ remote_access}}"
+      state: latest
+
+==============================================
+--- # Handlers errors Playbook
+ - hosts: local
+   remote_user: ansible
+   become: yes
+   vars:
+    web_package: httpd
+    remote_access: telnet
+    one_more: mariadb
+   tasks:
+    - block:
+      - name: installing Apache on nodes
+        yum:
+         name: "{{ web_package}}"
+         state: latest
+      rescue:
+      - name: Installing Telnet
+        yum:
+         name: "{{ remote_access}}"
+         state: latest
+      always:
+      - name: Installing Mariadb
+        yum:
+         name: "{{ one_more}}"
+         state: latest
+=================================================
+--- # Handlers errors Playbook
+ - hosts: local
+   remote_user: ansible
+   become: yes
+   tasks:
+   - name: Downloan in time
+     get_url:
+       url: https://speed.hetzner.de/10GB.bin
+#http://unec.edu.az/application/uploads/2014/12/pdf-sample.pdf
+       dest: /tmp
+     async: 100
+     poll: 5
+=================================================
+
+
